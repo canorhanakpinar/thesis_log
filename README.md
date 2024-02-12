@@ -9,6 +9,7 @@ I have recently submitted a 25 page proposal as my final paper for Introduction 
 It's a very amataeur experiment, by the way, and I have !not finalized! my plan.
 
 **Early Description:**
+
 I will consider ethical principles of respect for persons, beneficence, justice and assess risks and opportunities, after each minor step data acquisition.
 
 ?The effects of Law 6360 on agricultural production and rural life in affected and not affected cities of Turkey, in terms of food sovereignty and security.?
@@ -23,8 +24,11 @@ That's many many methods and data right here. That's a lot of work. That means I
 
 
 -----
-_End_
+
+End
+
 _Can Orhan Akpınar_
+
 ------
 
 "Thank you for reading my research so far. Please leave a comment if you want to help me with any ideas or criticize my publishings, that's a journey beginning." 
