@@ -6,7 +6,45 @@ In propensity score matching, I defined a set of variables for assessing similar
 
 A computational way of overcoming the measurement problem is to try as many sets in as many combinations. Using a vast set of features, we become less bounded to a curated set and can test many other options. This may cost a significant amount of computation time. Machine learning algorithms may also help to reduce dimensions such as with PCA (Principal Component Analysis), and LDA (Linear Discriminant Analysis).
 
-- Check standard errors
+
+### Overcoming Bias
+
+Bias are multifaceted. Variable selection, equation term selection, or algorithm selection may affect the results. Therefore, I will provide a set of benchmarking ideas. 
+
+Firstly, testing all the variable sets might not be practical. Some machine learning models will create weights of limited variables so that they create true outcomes. However, this means that we are conditioning ourselves for a defined set of outcomes for selecting our model. Classical regression models require hand-crafting variables and manual testing. Even this would create outcome-dependency bias and may affect the research process by changing the angle towards a different hypothesis. 
+
+Initially, a maximum number of set comparisons is needed. For example, if there are 20 independent variables, we can create 2^20-1 sets of variables. Testing all manually is impossible, but we can test with a loop and compare the sets of the first and last hundred results for elaborating different topics by randomness and correlation. 
+
+Secondly, as mentioned, there are multiple ways of matching or classifying. Therefore, I will use different machine learning classification probability models for result comparison. In this manner, train and test batches also needed to be reselected to find the distribution of the results. For this reason, around a hundred train-test splits are targeted for assessing a single model's prediction and F1 score. Conventionally, machine learning models perform better with more sets of features, but a small sample size may cause overfitting or underfitting. Let's think back to when we evaluate variables by propensity score models. Basically, it means I start with a logistic regression model test. 
+
+However, I am presenting logistic regression code prior to data collection and data generation to prevent data leakage into my model's assumptions. Check the related folder.
+
+**Some non-parametrics models** (response by ChatGPT 3.5)
+- Decision Trees: These models partition the feature space into regions and make predictions based on the average response of training observations in each region.
+- Random Forests: An ensemble of decision trees that reduces overfitting and improves generalization by aggregating predictions from multiple trees.
+- Support Vector Machines (SVM): SVMs aim to find the hyperplane that best separates the classes in the feature space. They are effective in high-dimensional spaces and in cases where the number of dimensions exceeds the number of samples.
+- Neural Networks: These models consist of interconnected layers of nodes (neurons) and can capture complex patterns in the data. They are highly flexible but can be computationally expensive and require careful tuning.
+
+**On selection of polynomial and log terms** (response bt ChatGPT 3.5)
+- Polynomial Regression: Polynomial regression directly incorporates polynomial terms (e.g., quadratic, cubic) into the regression equation. It fits a curve to the data by including higher-order terms, and the degree of the polynomial can be adjusted based on the complexity of the relationship between predictors and outcome.
+- Feature Selection with Regularization: Techniques like LASSO (L1 regularization) or Ridge Regression (L2 regularization) can select the most important features and simultaneously perform regularization to prevent overfitting. These methods can automatically shrink coefficients associated with less important features (including polynomial terms) towards zero.
+- Recursive Feature Elimination (RFE): RFE is an iterative feature selection technique that recursively removes the least important features until the desired number of features is reached. It can be combined with any machine learning algorithm to select the optimal polynomial terms.
+- Polynomial Features Transformation: Libraries like scikit-learn provide functions to automatically generate polynomial and interaction features. For example, sklearn.preprocessing.PolynomialFeatures can transform features to include not only quadratic terms but also cubic or higher-order terms.
+
+- Polynomial Terms (x^3, x^4, etc.): Including higher-order polynomial terms can capture more complex relationships between predictors and the outcome. However, adding too many polynomial terms can lead to overfitting, so it's essential to balance model complexity and generalization performance.
+- Logarithmic Transformations (log(x)): Logarithmic transformations are useful when the relationship between predictors and the outcome is non-linear and the effect of predictors on the outcome diminishes at higher values. Log transformations can help linearize the relationship and stabilize variance. They are often applied to skewed variables to make their distribution more symmetric.
+- Choosing Variables for Transformation: It's crucial to consider the characteristics of the variables and their relationships with the outcome when deciding which variables to transform. Continuous variables with skewed distributions or those with diminishing effects at higher values are good candidates for transformation. However, it's essential to validate the transformations and ensure they improve model performance without introducing undue complexity. Cross-validation techniques can help assess the impact of different transformations on model performance.
+
+**On using interaction terms** (response by ChatGPT 3.5)
+- Polynomial Regression: Polynomial regression can naturally include interaction terms. For example, if you have variables "x1" and "x2", you can include interaction terms like "x1*x2" to capture their combined effect. Polynomial regression can handle higher-order interaction terms as well.
+- Tree-based Models (Decision Trees, Random Forests, Gradient Boosting Machines): Decision trees and ensemble methods like Random Forests and Gradient Boosting Machines (GBMs) can automatically detect and incorporate interaction effects. These models recursively partition the feature space based on interactions between variables, allowing them to capture complex interactions without explicitly specifying them.
+- Neural Networks: Neural networks are highly flexible models capable of capturing complex interactions between variables. The hidden layers in neural networks can learn to represent and combine features in intricate ways, allowing them to capture interactions implicitly.
+- Feature Engineering: Even if the model itself does not automatically test for interaction terms, feature engineering techniques can be used to create interaction features manually. You can create new features by multiplying or combining existing features to capture interactions explicitly. Once created, these interaction features can be used as input to any machine learning algorithm.
+- Automatic Feature Selection: Some feature selection techniques, such as recursive feature elimination (RFE) or LASSO regularization, can automatically identify and select important interaction terms along with main effects.
+
+
+	
+	~** Check standard errors **~(this line should stay as a general reminder on the irony of bias due to minimization of standard errors, requires an additional literature review)
 
 **Explanation** 
 My interest in the analysis is to understand whether the affected cities experience alterations before and after the application of the law. 
