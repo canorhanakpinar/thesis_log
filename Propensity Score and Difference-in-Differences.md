@@ -11,7 +11,7 @@ A computational way of overcoming the measurement problem is to try as many sets
 
 Bias are multifaceted. Variable selection, equation term selection, or algorithm selection may affect the results. Therefore, I will provide a set of benchmarking ideas. 
 
-Firstly, testing all the variable sets might not be practical. Some machine learning models will create weights of limited variables so that they create true outcomes. However, this means that we are conditioning ourselves for a defined set of outcomes for selecting our model. Classical regression models require hand-crafting variables and manual testing. Even this would create outcome-dependency bias and may affect the research process by changing the angle towards a different hypothesis. 
+Firstly, testing all the variable sets might not be practical. Some machine learning models will create weights of limited number of variables so that they create better prediction. However, this means that we are conditioning ourselves for a defined set of outcomes for selecting our model. Classical regression models require hand-crafting variables and manual testing. Even this would create outcome-dependency bias and may affect the research process by changing the angle towards a different hypothesis. 
 
 Initially, a maximum number of set comparisons is needed. For example, if there are 20 independent variables, we can create 2^20-1 sets of variables. Testing all manually is impossible, but we can test with a loop and compare the sets of the first and last hundred results for elaborating different topics by randomness and correlation. 
 
@@ -88,6 +88,9 @@ Since farmer migration is a prevalent trend (req. ref.), all cities especially t
 
 How does vegetation density affect agriculture, or to what degree they are correlated?
 What are contrary examples?
+
+**Rainfall - Secondary + Transformed**
+Checking rainfall volume in line with vegetation density analysis.
 
 
 **Agricultural Output (as size, as fiscal) - Secondary**
