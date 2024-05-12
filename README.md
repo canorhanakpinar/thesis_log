@@ -1,5 +1,9 @@
 # thesis_log
-!not finalized! countdown ~ 14-16 months left
+!not finalized! countdown ~ 12 months left
+
+_Currently finishing my NLP training, and finalizing a literature research on (welfare) policies regarding food security in Turkey._
+
+
 All the work steps for my thesis at Koç University Computational Social Sciences MA program.
 I am graduated from Galatasaray University Sociology BA program. https://www.academia.edu/105451701/Analyse_Des_Facteurs_Sociaux_Influençant_La_Qualité_Du_Sommeil
 
