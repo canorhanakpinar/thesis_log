@@ -17,7 +17,7 @@ Initially, a maximum number of set comparisons is needed. For example, if there 
 
 Secondly, as mentioned, there are multiple ways of matching or classifying. Therefore, I will use different machine learning classification probability models for result comparison. In this manner, train and test batches also needed to be reselected to find the distribution of the results. For this reason, around a hundred train-test splits are targeted for assessing a single model's prediction and F1 score. Conventionally, machine learning models perform better with more sets of features, but a small sample size may cause overfitting or underfitting. Let's think back to when we evaluate variables by propensity score models. Basically, it means I start with a logistic regression model test. 
 
-However, I am presenting logistic regression code prior to data collection and data generation to prevent data leakage into my model's assumptions. Check the related folder.
+	However, I am presenting logistic regression code prior to data collection and data generation to prevent data leakage into my model's assumptions. Check the related folder.
 
 **Some non-parametrics models** (response by ChatGPT 3.5)
 - Decision Trees: These models partition the feature space into regions and make predictions based on the average response of training observations in each region.
