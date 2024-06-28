@@ -24,6 +24,6 @@ Keyword query, from Scopus, results from 13 June 2024:
 2. Second document is from Turkey, using "agricultural" and "rural", saved as
 "Türkiye_tarımsalVEkırsal_dergipark_27Jun2024.xlsx", containing 481 results, some of are exported as empty rows from the source.
 
-Keyword query, from Dergipark, results from 27 June 2024
+Keyword query, from Dergipark, results from 27 June 2024:
 
-(abstract: "tarımsal" AND abstract: "kırsal" ) AND (pubyear: (>=1940)):
+(abstract: "tarımsal" AND abstract: "kırsal" ) AND (pubyear: (>=1940))
