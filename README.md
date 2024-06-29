@@ -1,16 +1,12 @@
 # thesis_log
-!not finalized! countdown ~ 12 months left
-
-_Currently finishing my NLP training, and finalizing a literature research on (welfare) policies regarding food security in Turkey._
-
+!almost finalized! countdown ~ 11 months left
 
 All the work steps for my thesis at Koç University Computational Social Sciences MA program.
-I am graduated from Galatasaray University Sociology BA program. https://www.academia.edu/105451701/Analyse_Des_Facteurs_Sociaux_Influençant_La_Qualité_Du_Sommeil
+I am graduated from Galatasaray University Sociology BA program. Final dissertation: https://www.academia.edu/105451701/Analyse_Des_Facteurs_Sociaux_Influençant_La_Qualité_Du_Sommeil
 
 I am creating this repository for Open Science purposes.
-I have recently submitted a 25 page proposal as my final paper for Introduction to CSS course.
 
-It's a very amataeur experiment, by the way, and I have !not finalized! my plan.
+It's a very amateur experiment, by the way, and the plan is ongoing.
 
 **Early Description:**
 
@@ -22,9 +18,7 @@ Satellite imagery, parcel transfers, official gazette database, economic, demogr
 I will use Python and QGIS software tools.
 
 That's many many methods and data right here. That's a lot of work. That means I have to assess feasibility of everything. Therefore I will create a cost estimation of time and money. 
-
-
-
+- ps: I didn't created such estimation, it mostly an on-the-fly minimum-cost homemade project at the moment.
 
 
 -----
