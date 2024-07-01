@@ -4,6 +4,8 @@ This page presents the variables, extracted from readings. I will add more as I 
 
 I will employ these variables for propensity score matching in particular.
 
+Since I have not finalized my hypothesis, I am not sure about the DID variable yet.
+
 **From:**  Kuzu, S. H. (2022). Güneydoğu Anadolu Bölgesinin Mevcut Tarımsal Yapısının Analizi. Ünye İktisadi Ve İdari Bilimler Fakültesi Dergisi, 5(1), 30-46.
 - Alınan göç, verilen göç, net göç (sy.33)
 - Bölgedeki işgücü ve istihdam (sy. 34)
