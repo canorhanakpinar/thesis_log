@@ -15,7 +15,7 @@ Finally, I hope to derive a puzzle from these articles.
 
 
 ### Documents
-1. In the first part, I started with global research. The file is "food_sovereignty_scopus_13Jun2024.xlsx" containing 1502 abstracts. I am at 562th article.
+1. In the first part, I started with global research. The file is "food_sovereignty_scopus_13Jun2024.xlsx" containing 1502 abstracts. Tagged 1170 articles, read in chronological order
 
 Keyword query, from Scopus, results from 13 June 2024:
   
@@ -27,3 +27,9 @@ Keyword query, from Scopus, results from 13 June 2024:
 Keyword query, from Dergipark, results from 27 June 2024:
 
 (abstract: "tarımsal" AND abstract: "kırsal" ) AND (pubyear: (>=1940))
+
+3. Started working on the creation of a Food Sovereignty Index. I am not not creating an export, literature is very sparse.
+
+   Keyword quey, fro m Scopus, results from 06 Temmuz 2024 == 51 Research results:
+
+   TITLE-ABS-KEY ( food AND sovereignty AND index ) 
