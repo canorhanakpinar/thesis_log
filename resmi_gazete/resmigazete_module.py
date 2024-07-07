@@ -4,20 +4,20 @@ from urllib.parse import urljoin
 import time
 import re
 import pandas as pd
-import os
 
-class ResmiGazeteScraper:    
-    def __init__(self, year):  
+class ResmiGazeteScraper:
+    def __init__(self, year):
         self.base_url = 'https://www.resmigazete.gov.tr/eskiler'
         self.year = str(year)
         self.months = [f"{month:02d}" for month in range(1, 13)]
         self.days = [f"{day:02d}" for day in range(1, 32)]
-        self.content = ""  # Content accumulated as a single string
+        self.content = ""
         self.last_url = None
         self.last_xpath = None
+        self.data = []
+        self.df = pd.DataFrame()  # Initialize an empty DataFrame
 
     def get_xpath(self, element):
-        """Generate XPath for a BeautifulSoup element by walking up its tree."""
         components = []
         child = element if element.name else element.parent
         while child is not None and child.name != '[document]':
@@ -28,57 +28,140 @@ class ResmiGazeteScraper:
         components.reverse()
         return '/' + '/'.join(components)
 
-    def scrape(self):
+    def scrape(self, tags=None):
+        self.tags = tags or 'a'  # Default tags if none provided
         for month in self.months:
             for day in self.days:
                 url = f"{self.base_url}/{self.year}/{month}/{self.year}{month}{day}.htm"
-                time.sleep(1)  # Adjusted delay to prevent too frequent requests
+                time.sleep(1)
                 response = requests.get(url)
-                
-                if 'charset' in response.headers.get('Content-Type', ''):
-                    encoding = response.headers['Content-Type'].split('charset=')[-1]
-                else:
-                    encoding = response.apparent_encoding
-                response.encoding = encoding
-
                 if response.status_code == 200:
-                    soup = BeautifulSoup(response.text, 'lxml')
-                    for element in soup.find_all(True):  # True fetches all tags
-                        raw_text = element.get_text()
-                        text = re.sub(r'\s+', ' ', raw_text).strip()  # Replace multiple whitespace/newline with single space
-                        text = text.replace('\u0094', '')  # Strip the specific unicode character
-                        if text:
-                            xpath = self.get_xpath(element)
-                            current_detail = f"Date: {self.year}-{month}-{day}, XPath: {xpath}, Tag: {element.name}"
-                            if element.name == 'a':
-                                href = element['href'] if 'href' in element.attrs else 'No href available'
-                                href = urljoin(url, href)
-                                text_detail = f"Link: {href}, Text: {text}"
-                            else:
-                                text_detail = f"Text: {text}"
-                            
-                            if xpath == self.last_xpath and url == self.last_url:
-                                self.content += " " + text  # Append text only
-                            else:
-                                self.content += f"\n{current_detail}, {text_detail}"
-                                self.last_url = url
-                                self.last_xpath = xpath
-                
+                    self.process_page(response, url, month, day)
                 else:
-                    print(f"{self.base_url}/{self.year}/{month}/{self.year}{month}{day}.htm: Status code {response.status_code}")
+                    print(f"Failed to retrieve the page: {url}, Status code {response.status_code}")
+
+    def process_page(self, response, url, month, day):
+        if 'charset' in response.headers.get('Content-Type', ''):
+            encoding = response.headers['Content-Type'].split('charset=')[-1]
+        else:
+            encoding = response.apparent_encoding
+        response.encoding = encoding
+
+        soup = BeautifulSoup(response.text, 'lxml')
+        for element in soup.find_all(self.tags):
+            text = re.sub(r'\s+', ' ', element.get_text()).strip()
+            text = text.replace('\u0094', '')  # Replace specific unicode character if needed    
+            if text not in ("Å" , "Sayfa Başı", "Æ", "ÖNCEKİ", "SONRAKİ", ""):
+                xpath = self.get_xpath(element)
+                if element.name == 'a' and element.has_attr('href'):
+                    href = urljoin(url, element['href'])  # Correctly handle href only for 'a' tags
+                    
+                else:
+                    href = "No href" 
+
+            # Check if it's the same as the last href to decide whether to append or start a new line
+                if  href == self.last_url:
+                    self.content += " " + text  # Append text only, corrected from '\n' to ' ' for continuity
+                else:
+                    detail = f"Date: {self.year}-{month}-{day}, XPath: {xpath}, Tag: {element.name}"
+                    if href:
+                        detail += f", Link: {href}, Text: {text}"
+                    else:
+                        detail += f", Text: {text}"
+                    
+                    self.content += f"\n{detail}"
+                    self.last_url = href  # Update last_url regardless of element type
+                    self.last_xpath = xpath
 
     def save_content_to_file(self):
         directory = "resmigazete_all"
-        if not os.path.exists(directory):
-            os.makedirs(directory)
         filename = f"{directory}/XPaths_resmigazete_{self.year}.txt"
         with open(filename, "w", encoding="utf-8") as file:
-            file.write(self.content.strip())  # Save cleaned-up content
+            file.write(self.content.strip())
         print(f"Content saved to {filename}")
 
+    def parse_to_dataframe(self):
+        lines = self.content.split('\n')
+        current_entry = {"Text" :"" }
+        for line in lines:
+            # Use regex to correctly split the line into key-value pairs
+            try:
+                parts = re.split(r', (?=\b(?:Date|XPath|Tag|Text|Link)\b)', line.strip())
+                entry = {key.strip(): value.strip() for part in parts for key, value in [part.split(': ', 1)]}
+            except:
+                entry = {"Text" : ""}
+            
+            # Manage appending or creating new entries based on the link continuity
+            if current_entry and entry.get('Link') == current_entry.get('Link'):
+                # If the same link, concatenate the text
+                current_entry['Text'] += " " + entry['Text']
+            else:
+                # If a different link or a new line, append the current entry and start a new one
+                if current_entry:
+                    self.data.append(current_entry)
+                current_entry = entry
+
+        # Ensure the last entry is added
+        if current_entry:
+            self.data.append(current_entry)
+        
+        # Create DataFrame from the list of dictionaries
+        self.df = pd.DataFrame(self.data)
+        self.df.drop(["XPath", "Tag"], axis=1, inplace = True)
+        # Optionally, add empty columns as required
+        empty_columns = ['Legal Category', 'Summary', 'Hyperlinks', 'Note1', 'Note2', 'Note3']
+        for col in empty_columns:
+            self.df[col] = "EMPTY"
+ 
+
+    def save_to_json(self):
+        if self.df.empty:
+            print("No data to save.")
+            return
+        output_file = f"resmigazete_all/titles_resmigazete_{self.year}.json"
+        self.df.to_json(output_file, orient='records', lines=True)
+        print(f"Data saved to {output_file}")
+
+    def save_to_excel(self):
+        if self.df.empty:
+            print("No data to save to Excel.")
+            return
+        output_file = f"resmigazete_all/titles_resmigazete_{self.year}.xlsx"
+        self.df.to_excel(output_file, index=False)
+        print(f"Data saved to {output_file}")
+
+    def update_hyperlinks(self, filepath, start_date, end_date):
+        # Load the DataFrame from the given Excel file
+        hyper_df = pd.read_excel(filepath)
+        hyper_df['Date'] = pd.to_datetime(hyper_df['Date'])  # Ensure Date column is in datetime format
+        
+        # Filter the DataFrame based on the provided date range
+        filtered_df = hyper_df[(hyper_df['Date'] >= pd.to_datetime(start_date)) & (hyper_df['Date'] <= pd.to_datetime(end_date))]
+        
+        # Process each row in the filtered DataFrame to extract hyperlinks
+        for index, row in filtered_df.iterrows():
+            url = row['Link']
+            try:
+                response = requests.get(url)
+                time.sleep(1)
+                if response.status_code == 200:
+                    soup = BeautifulSoup(response.text, 'lxml')
+                    links = [urljoin(url, tag.get('href', '')) for tag in soup.find_all('a', href=True)]
+                    links_str = '; '.join(links)  # Join all links with a semicolon
+                    hyper_df.at[index, 'Hyperlinks'] = links_str  # Update the DataFrame
+            except requests.RequestException as e:
+                print(f"Failed to retrieve {url}: {str(e)}")
+        
+        # Convert Date column back to string format without time component
+        hyper_df['Date'] = hyper_df['Date'].dt.strftime('%Y-%m-%d')
+        
+        # Save the updated DataFrame back to the same Excel file
+        hyper_df.to_excel(filepath, index=False)
+        print(f"Updated Excel file saved to {filepath}")
 
 
 
+## Merged with Scraper
 class ResmiGazeteLinkParser:
     def __init__(self, year):
         self.year = year
@@ -109,7 +192,8 @@ class ResmiGazeteLinkParser:
             self.data.append(current_entry)
 
         self.df = pd.DataFrame(self.data)
-
+        self.df.drop(["XPath", "Tag"], axis=1)
+        
         # Adding extra empty columns
         empty_columns = ['Legal Category', 'Summary', 'Hyperlinks', 'Note1', 'Note2', 'Note3', 'Note4', 'Note5', 'Note6']
         for col in empty_columns:
@@ -120,7 +204,7 @@ class ResmiGazeteLinkParser:
             print("No data to save.")
             return
 
-        output_file = f"resmigazete_all/links_resmigazete_{self.year}.json"
+        output_file = f"resmigazete_all/titles_resmigazete_{self.year}.json"
         self.df.to_json(output_file, orient='records', lines=True)
         print(f"Data saved to {output_file}")
     
