@@ -1,4 +1,4 @@
-##### Pre-Abstract: In this research, I aim to develop a Food Sovereignty Index (FSoI) to measure the social vulnerability aspect of food security in agriculture and food networks. In particular, rural transformation reveals the change in the relationship of peasants with the land. In the global context, food is easily accessible via hyperfast international trade. Food security is a deductive approach in response to the biological and environmental aspects of the agri-food systems. Here, I will create a ground-based approach index using the variables mentioned in historical and regional research. Globally referenced variables will be used after a comparison with domestic variables. I will apply the Food Sovereignty Index for the year 2012, to Turkey's Law No. 6360, the "Metropolitan Law" (Büyükşehir Yasası), which represents a control variable for measuring the change of food sovereignty, with respect to food security.
+##### Pre-Abstract: In this research, I aim to develop a Food Sovereignty Index (FSOI) to measure the social vulnerability aspect of food security in agriculture and food networks. In particular, rural transformation reveals the change in the relationship of peasants with the land. In the global context, food is easily accessible via hyperfast international trade. Food security is a deductive approach in response to the biological and environmental aspects of the agri-food systems. Here, I will create a ground-based approach index using the variables mentioned in historical and regional research. Globally referenced variables will be used after a comparison with domestic variables. I will apply the Food Sovereignty Index for the year 2012, to Turkey's Law No. 6360, the "Metropolitan Law" (Büyükşehir Yasası), which represents a control variable for measuring the change of food sovereignty, with respect to food security.
 
 # Outline
 
@@ -20,7 +20,7 @@ How index is created
 An overview of the computational approach to measuring and validating food sovereignty index.
 
 
-## Application of FSoI to Law No.6360, Büyükşehir Yasası
+## Application of FSOI to Law No.6360, Büyükşehir Yasası
 
 ### History of the Metropolitan Law
 An overview of urban-rural governance transition
