@@ -1,24 +1,31 @@
 # thesis_log
-!almost finalized! countdown ~ 11 months left
+ ~ 6 months left
+Advisor: Ali Hürriyetoğlu, Koç University Computational Social Sciences & Wageningen Food Safety Research
 
-All the work steps for my thesis at Koç University Computational Social Sciences MA program.
-I am graduated from Galatasaray University Sociology BA program. Final dissertation: https://www.academia.edu/105451701/Analyse_Des_Facteurs_Sociaux_Influençant_La_Qualité_Du_Sommeil
 
-I am creating this repository for Open Science purposes.
+The work for my thesis at Koç University Computational Social Sciences MA program.
 
-It's a very amateur experiment, by the way, and the plan is ongoing.
 
-**Early Description:**
+Last graduated from Galatasaray University Sociology BA program. Bachelor's final dissertation: https://www.academia.edu/105451701/Analyse_Des_Facteurs_Sociaux_Influençant_La_Qualité_Du_Sommeil
 
-I will consider ethical principles of respect for persons, beneficence, justice and assess risks and opportunities, after each minor step data acquisition.
+for Open Science
 
-?The effects of Law 6360 on agricultural production and rural life in affected and not affected cities of Turkey, in terms of food sovereignty and security.?
-Machine learning; image recognition, natural language processing, regression(PSM and DID), topic classification, raster analysis (, and hopefully a field trip) are initialy chosen methods.
-Satellite imagery, parcel transfers, official gazette database, economic, demographic, ethnic, and geographic data shall help me along this way to open my sight for les vérites du monde. 
-I will use Python and QGIS software tools.
+This research is an experiment, the original plan can be found in writing drafts.
 
-That's many many methods and data right here. That's a lot of work. That means I have to assess feasibility of everything. Therefore I will create a cost estimation of time and money. 
-- ps: I didn't created such estimation, it mostly an on-the-fly minimum-cost homemade project at the moment.
+**Description:**
+
+Topic: Creating a food sovereignty index for measuring policy impacts.
+
+Case: Türkiye, 2012 Büyükşehir Yasası (Metropolitan Law), 6360 Sayılı Kanun (Law 6360)
+
+Research Methods: Turkiye Official Gazette policy analysis with natural language processing, econometric analysis with Turkstat national agricultural data. Land and climate analysis with geographic information systems.
+
+
+I will consider ethical principles for respect for persons, beneficence, justice and assess risks and opportunities, after each minor step data acquisition. __Edit__: Using completely open source government data in this project.
+
+
+
+This is an homemade project.
 
 
 -----
@@ -29,7 +36,7 @@ _Can Orhan Akpınar_
 
 ------
 
-"Thank you for reading my research so far. Please leave a comment if you want to help me with any ideas or criticize my publishings, that's a journey beginning." 
+"Thank you for reading my research so far. Have a nice day." 
 
 Best wishes,
 
