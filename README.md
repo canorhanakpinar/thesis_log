@@ -1,5 +1,5 @@
 # thesis_log
- ~ 6 months left
+ ~ 2 months left
  
 Advisor: Ali Hürriyetoğlu, Koç University Computational Social Sciences & Wageningen Food Safety Research
 
